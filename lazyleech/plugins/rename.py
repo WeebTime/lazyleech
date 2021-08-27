@@ -16,18 +16,6 @@
 
 import asyncio
 import html
-import math
-import os
-import re
-
-from pyrogram import Client, filters
-
-from .. import ALL_CHATS, help_dict, ForceDocumentFlag, SendAsZipFlag, PROGRESS_UPDATE_DELAY
-from ..utils.upload_worker import _upload_file
-
-
-import asyncio
-import html
 import time
 import math
 import os
