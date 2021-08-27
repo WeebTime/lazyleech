@@ -26,6 +26,19 @@ from .. import ALL_CHATS, help_dict, ForceDocumentFlag, SendAsZipFlag, PROGRESS_
 from ..utils.upload_worker import _upload_file
 
 
+import asyncio
+import html
+import time
+import math
+import os
+import re
+
+from pyrogram import Client, filters
+
+from .. import ALL_CHATS, help_dict, ForceDocumentFlag, SendAsZipFlag, PROGRESS_UPDATE_DELAY
+from ..utils.upload_worker import _upload_file
+
+
 @Client.on_message(filters.command(['rename', 'filerename']) & filters.chat(ALL_CHATS))
 async def rename(client, message):
     text = message.command
@@ -51,7 +64,7 @@ async def rename(client, message):
     if download_message is None:
         await message.reply_text('Media required')
         return
-    filepath = os.path.join(name)
+    filepath = os.path.join(str(message.from_user.id), str(time.time()))
     msg = await message.reply_text('Downloading...')
     await download_message.download(filepath)
     await msg.edit_text("Uploading...")
